@@ -156,7 +156,6 @@ if game_counter == 1:
     game_1.append(bot_score)
     game_1.append(user_score)
     game_counter += 1
-    print("Game 1 finished!")
 if game_counter == 2:
     bot_deck_new, user_deck_new = deck_simple.run_everything(deck_simple.bot_deck, deck_simple.user_deck)
     bot_score, user_score = new_game()
@@ -181,15 +180,12 @@ if game_counter == 5:
     game_5.append(bot_score)
     game_5.append(user_score)
     final_list = [game_1, game_2, game_3, game_4, game_5]
-    print(final_list)
     bot_final = 0
     user_final = 0
     for i in final_list:
         bot_final += i[0]
     for i in final_list:
         user_final += i[1]
-    print(bot_final)
-    print(user_final)
     if user_final < bot_final:
         print("Congratulations! Out of 5 games, you managed to win with a score of {0}.".format(user_final))
         print("Scores for game 1 (bot, user):" + str(game_1))
