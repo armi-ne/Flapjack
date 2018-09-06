@@ -6,11 +6,9 @@ clear = lambda: os.system('cls')
 
 #Running introduction sequence
 intro.welcome_sequence()
-#Splitting a deck of cards into 4 suits, then assigning 1 suit of each colour, for up to 2 suits, for a deck
-bot_deck_new, user_deck_new = deck_simple.run_everything(deck_simple.bot_deck, deck_simple.user_deck)
-#Shuffling both decks
-random.shuffle(bot_deck_new)
-random.shuffle(user_deck_new)
+
+#Game # counter
+game_counter = 1
 
 #Bots turn to play
 def bot_play():
@@ -45,10 +43,10 @@ def bot_play():
                 value -= 10
         counter += value
         bot_deck_new.remove(card)
-    if counter > 25:
-        return 25
-    else:
+    if counter < 25 and counter >= 16:
         return 25 - counter
+    else:
+        return 25
 
 #User's turn to play
 def user_play():
@@ -130,14 +128,79 @@ def user_play():
             user_cont = False
         user_deck_new.remove(card)
         clear()
-    if value > 25:
-        return 25
-    else:
+    if value < 25 and value >= 16:
         return 25 - value
+    else:
+        return 25
 
-bot_score = bot_play()
-print("User's Turn")
-user_score = user_play()
-print("")
-print("Bot score: {0}".format(bot_score))
-print("User score: {0}".format(user_score))
+def new_game():
+    bot_score = 0
+    user_score = 0
+    bot_score = bot_play()
+    print("User's Turn")
+    user_score = user_play()
+    print("")
+    print("Bot score: {0}".format(bot_score))
+    print("User score: {0}".format(user_score))
+    return bot_score, user_score
+
+game_1 = []
+game_2 = []
+game_3 = []
+game_4 = []
+game_5 = []
+
+if game_counter == 1:
+    bot_deck_new, user_deck_new = deck_simple.run_everything(deck_simple.bot_deck, deck_simple.user_deck)
+    bot_score, user_score = new_game()
+    game_1.append(bot_score)
+    game_1.append(user_score)
+    game_counter += 1
+    print("Game 1 finished!")
+if game_counter == 2:
+    bot_deck_new, user_deck_new = deck_simple.run_everything(deck_simple.bot_deck, deck_simple.user_deck)
+    bot_score, user_score = new_game()
+    game_2.append(bot_score)
+    game_2.append(user_score)
+    game_counter += 1
+if game_counter == 3:
+    bot_deck_new, user_deck_new = deck_simple.run_everything(deck_simple.bot_deck, deck_simple.user_deck)
+    bot_score, user_score = new_game()
+    game_3.append(bot_score)
+    game_3.append(user_score)
+    game_counter += 1
+if game_counter == 4:
+    bot_deck_new, user_deck_new = deck_simple.run_everything(deck_simple.bot_deck, deck_simple.user_deck)
+    bot_score, user_score = new_game()
+    game_4.append(bot_score)
+    game_4.append(user_score)
+    game_counter += 1
+if game_counter == 5:
+    bot_deck_new, user_deck_new = deck_simple.run_everything(deck_simple.bot_deck, deck_simple.user_deck)
+    bot_score, user_score = new_game()
+    game_5.append(bot_score)
+    game_5.append(user_score)
+    final_list = [game_1, game_2, game_3, game_4, game_5]
+    print(final_list)
+    bot_final = 0
+    user_final = 0
+    for i in final_list:
+        bot_final += i[0]
+    for i in final_list:
+        user_final += i[1]
+    if user_final < bot_final:
+        print("Congratulations! Out of 5 games, you managed to win with a score of {0}.".format(user_final))
+        print("Scores for game 1 (bot, user):" + str(game_1))
+        print("Scores for game 2 (bot, user):" + str(game_2))
+        print("Scores for game 3 (bot, user):" + str(game_3))
+        print("Scores for game 4 (bot, user):" + str(game_4))
+        print("Scores for game 5 (bot, user):" + str(game_5))
+        print("Final scores = Bot: {0}, User: {1}.".format(bot_final, user_final))
+    elif bot_final > user_final:
+        print("Sorry, but the bot won this time with a score of {0}.".format(user_final))
+        print("Scores for game 1 (bot, user):" + str(game_1))
+        print("Scores for game 2 (bot, user):" + str(game_2))
+        print("Scores for game 3 (bot, user):" + str(game_3))
+        print("Scores for game 4 (bot, user):" + str(game_4))
+        print("Scores for game 5 (bot, user):" + str(game_5))
+        print("Final scores = Bot: {0}, User: {1}.".format(bot_final, user_final))
