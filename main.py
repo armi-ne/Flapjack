@@ -188,6 +188,8 @@ if game_counter == 5:
         bot_final += i[0]
     for i in final_list:
         user_final += i[1]
+    print(bot_final)
+    print(user_final)
     if user_final < bot_final:
         print("Congratulations! Out of 5 games, you managed to win with a score of {0}.".format(user_final))
         print("Scores for game 1 (bot, user):" + str(game_1))
@@ -196,8 +198,16 @@ if game_counter == 5:
         print("Scores for game 4 (bot, user):" + str(game_4))
         print("Scores for game 5 (bot, user):" + str(game_5))
         print("Final scores = Bot: {0}, User: {1}.".format(bot_final, user_final))
-    elif bot_final > user_final:
-        print("Sorry, but the bot won this time with a score of {0}.".format(user_final))
+    elif bot_final < user_final:
+        print("Sorry, but the bot won this time with a score of {0}.".format(bot_final))
+        print("Scores for game 1 (bot, user):" + str(game_1))
+        print("Scores for game 2 (bot, user):" + str(game_2))
+        print("Scores for game 3 (bot, user):" + str(game_3))
+        print("Scores for game 4 (bot, user):" + str(game_4))
+        print("Scores for game 5 (bot, user):" + str(game_5))
+        print("Final scores = Bot: {0}, User: {1}.".format(bot_final, user_final))
+    elif bot_final == user_final:
+        print("It's a Draw!")
         print("Scores for game 1 (bot, user):" + str(game_1))
         print("Scores for game 2 (bot, user):" + str(game_2))
         print("Scores for game 3 (bot, user):" + str(game_3))
