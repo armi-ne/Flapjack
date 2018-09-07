@@ -38,9 +38,6 @@ def probability_calc(cards_in_deck, value_of_hand):
     total_val = val_of_blacks + val_of_reds
     prob_of_red = val_of_reds / total_val
     prob_of_black = val_of_blacks / total_val
-    print(prob_of_black)
-    print(prob_of_red)
-    print(prob_of_black - prob_of_red)
     if no_of_cards_in_deck == 26:
         return "Yes"
     elif no_of_cards_in_deck > 0:
