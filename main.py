@@ -1,6 +1,7 @@
 import deck_simple
 import intro
 import random
+import time
 import os
 import probability
 clear = lambda: os.system('cls')
@@ -54,7 +55,7 @@ def user_play():
     user_cont = True
     value = 0
     while (user_cont == True) and (value <= 25) and (len(user_deck_new) > 0):
-        print("The current value of your hand is: {0}".format(value))
+        print("The previous value of your hand was: {0}".format(value))
         card = random.choice(user_deck_new)
         colour = ""
         colour_present = ""
@@ -108,27 +109,35 @@ def user_play():
                 if int(card[1]) >= 2 and int(card[1]) < 10:
                     value -= int(card[1])
             elif card[1] == "a":
-                ask = input("You've been dealt a red Ace, would you like to use it as a 1 or an 11? ")
+                ask = input("You've been dealt a red Ace, would you like to use it as a -1 or an -11? ")
                 if ask == "1":
                     value -= 1
                 elif ask == "11":
                     value -= 11
             else:
                 value -= 10
-        print("The new value of your hand is {0} and there are {1} cards left in your deck.".format(value, len(user_deck_new)))
+        print("The new value of your hand is {0} and there are {1} cards left in your deck.".format(value, len(user_deck_new) - 1))
         if value > 25:
             print("Sorry, but you just got bust.")
             break
         elif value == 25:
             print("Congratulations! You managed to get 25.")
             break
-        carry_on_or_hold = input("Would you like to carry on (Y) or fold (N)? Y/N: ")
-        if carry_on_or_hold.upper() == "Y":
-            user_cont = True
-        else:
-            user_cont = False
+        check = True
+        while check == True:
+            carry_on_or_hold = input("Would you like to carry on (Y) or fold (N)? Y/N: ")
+            if carry_on_or_hold.upper() == "Y":
+                user_cont = True
+                check = False
+            elif carry_on_or_hold.upper() == "N":
+                user_cont = False
+                check = False
+            else:
+                check = True
         user_deck_new.remove(card)
         clear()
+    print("The final value of your hand was {0}".format(value))
+    time.sleep(2)
     if value < 25 and value >= 16:
         return 25 - value
     else:
