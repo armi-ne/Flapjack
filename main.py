@@ -2,6 +2,7 @@ import deck_simple
 import intro
 import random
 import os
+import probability
 clear = lambda: os.system('cls')
 
 #Running introduction sequence
@@ -13,7 +14,7 @@ game_counter = 1
 #Bots turn to play
 def bot_play():
     counter = 0
-    while (counter <= 25) and not (counter >= 20) and (len(bot_deck_new) >0):
+    while (len(bot_deck_new) > 0 and (probability.probability_calc(bot_deck_new, counter) == "Yes")):
         card = random.choice(bot_deck_new)
         colour = ""
         value = 0
@@ -53,7 +54,7 @@ def user_play():
     user_cont = True
     value = 0
     while (user_cont == True) and (value <= 25) and (len(user_deck_new) > 0):
-        print("The current value of your deck is: {0}".format(value))
+        print("The current value of your hand is: {0}".format(value))
         card = random.choice(user_deck_new)
         colour = ""
         colour_present = ""
@@ -133,6 +134,7 @@ def user_play():
     else:
         return 25
 
+#Launches a new game after each round
 def new_game():
     bot_score = 0
     user_score = 0
@@ -144,12 +146,14 @@ def new_game():
     print("User score: {0}".format(user_score))
     return bot_score, user_score
 
+#Keep track of scores
 game_1 = []
 game_2 = []
 game_3 = []
 game_4 = []
 game_5 = []
 
+#Starts the game and runs it through 5 rounds
 if game_counter == 1:
     bot_deck_new, user_deck_new = deck_simple.run_everything(deck_simple.bot_deck, deck_simple.user_deck)
     bot_score, user_score = new_game()
