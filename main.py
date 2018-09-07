@@ -4,6 +4,7 @@ import random
 import time
 import os
 import probability
+import msvcrt
 clear = lambda: os.system('cls')
 
 #Running introduction sequence
@@ -52,6 +53,7 @@ def bot_play():
 
 #User's turn to play
 def user_play():
+    clear()
     user_cont = True
     value = 0
     while (user_cont == True) and (value <= 25) and (len(user_deck_new) > 0):
@@ -125,14 +127,18 @@ def user_play():
             break
         check = True
         while check == True:
-            carry_on_or_hold = input("Would you like to carry on (Y) or fold (N)? Y/N: ")
-            if carry_on_or_hold.upper() == "Y":
+            print("Would you like to carry on (Y) or fold (N)? Y/N: ")
+            carry_on_or_hold_raw = msvcrt.getch()
+            carry_on_or_hold = str(carry_on_or_hold_raw)
+            if carry_on_or_hold[2].upper() == "Y":
                 user_cont = True
                 check = False
-            elif carry_on_or_hold.upper() == "N":
+            elif carry_on_or_hold[2].upper() == "N":
                 user_cont = False
                 check = False
             else:
+                carry_on_or_hold = None
+                carry_on_or_hold_raw = None
                 check = True
         user_deck_new.remove(card)
         clear()
